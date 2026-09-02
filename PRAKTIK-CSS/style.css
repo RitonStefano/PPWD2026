@@ -1,3 +1,4 @@
+
 /* ===== Pengaturan Dasar ===== */
 * {
     margin: 0;
@@ -8,13 +9,13 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
     line-height: 1.6;
-    color: #334155;
-    background-color: #f1f5f9;
+    color: #475569;
+    background-color: #fff7ed;
 }
 
 /* ===== Header ===== */
 .header {
-    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    background: linear-gradient(135deg, #ff6b6b, #ffb347);
     color: #ffffff;
     text-align: center;
     padding: 40px 20px;
@@ -30,26 +31,26 @@ body {
     opacity: 0.9;
 }
 
-.header img{
+.header img {
     border-radius: 50%;
 }
 
 /* ===== Navigasi ===== */
 .nav {
-    background-color: #1e293b;
+    background-color: #ffd166;
     text-align: center;
     padding: 12px;
 }
 
 .nav a {
-    color: #e2e8f0;
+    color: #ffffff;
     text-decoration: none;
     margin: 0 16px;
     font-weight: bold;
 }
 
 .nav a:hover {
-    color: #a5b4fc;
+    color: #ff6b6b;
 }
 
 /* ===== Konten ===== */
@@ -64,12 +65,12 @@ body {
     border-radius: 12px;
     padding: 24px;
     margin-bottom: 24px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 8px rgba(255, 107, 107, 0.15);
 }
 
 .konten h2 {
-    color: #4f46e5;
-    border-bottom: 3px solid #e0e7ff;
+    color: #ff6b6b;
+    border-bottom: 3px solid #ffe0e0;
     padding-bottom: 8px;
     margin-bottom: 16px;
 }
@@ -86,22 +87,22 @@ table {
 
 th,
 td {
-    border: 1px solid #e2e8f0;
+    border: 1px solid #ffd6a5;
     padding: 10px 14px;
     text-align: left;
 }
 
 th {
-    background-color: #4f46e5;
+    background-color: #ff8c42;
     color: #ffffff;
 }
 
 tr:nth-child(even) {
-    background-color: #eef2ff;
+    background-color: #fff0d9;
 }
 
 tr:hover {
-    background-color: #e0e7ff;
+    background-color: #ffe4b5;
 }
 
 /* ===== Formulir ===== */
@@ -115,7 +116,7 @@ form input,
 form textarea {
     width: 100%;
     padding: 10px 12px;
-    border: 2px solid #cbd5e1;
+    border: 2px solid #ffd6a5;
     border-radius: 8px;
     font-family: inherit;
 }
@@ -123,12 +124,12 @@ form textarea {
 form input:focus,
 form textarea:focus {
     outline: none;
-    border-color: #4f46e5;
+    border-color: #ff8c42;
 }
 
 form button {
     margin-top: 16px;
-    background-color: #4f46e5;
+    background-color: #ff6b6b;
     color: #ffffff;
     border: none;
     padding: 12px 28px;
@@ -138,14 +139,15 @@ form button {
 }
 
 form button:hover {
-    background-color: #ca9c38;
-    transform:scale(1.05)
+    background-color: #f7b32b;
+    transform: scale(1.05)
 }
 
 /* ===== Footer ===== */
 .footer {
-    background-color: #1e293b;
-    color: #94a3b8;
+    background-color: #ff7f50;
+    color: #ffffff;
     text-align: center;
     padding: 20px;
 }
+
