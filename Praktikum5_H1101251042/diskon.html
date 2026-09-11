@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Kalkulator Diskon</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f0f8ff;
+        }
+
+        .suhu {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        input {
+            padding: 10px;
+            margin: 5px;
+            font-size: 16px;
+            width: 80%;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 10px 15px;
+            margin: 5px;
+            font-size: 16px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #298069;
+        }
+
+        .hasil {
+            font-size: 28px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-top: 20px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="suhu">
+
+        <h2>Hitung Diskon</h2>
+
+        <input type="text" id="angka1" placeholder="Masukkan Total Belanja">
+
+        <button onclick="total()">Hitung</button>
+
+        <button onclick="reset()" style="background: #e74c3c;">Reset</button>
+
+        <div class="hasil">Total Akhir: <span id="hasilAngka">Rp.0</span></div>
+
+    </div>
+
+    <script>
+
+        // Penjelasan: document.getElementById digunakan untuk mengambil nilai dari tag HTML
+
+        function total() {
+
+            let a = parseFloat(document.getElementById('angka1').value);
+
+            if (a > 100000) {
+
+                return document.getElementById('hasilAngka').innerHTML = "Rp." + a * (90 / 100);
+            }
+            else document.getElementById('hasilAngka').innerHTML = "Rp." + a;
+
+
+        }
+
+
+        function reset() {
+
+            document.getElementById('angka1').value = "";
+
+            document.getElementById('angka2').value = "";
+
+            document.getElementById('hasilAngka').innerHTML = '0';
+
+        }
+
+    </script>
+
+</body>
+
+</html>

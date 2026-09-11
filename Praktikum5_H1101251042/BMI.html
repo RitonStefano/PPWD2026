@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Kalkulator BMI</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="suhu">
+
+        <h2>Hitung BMI Anda</h2>
+
+        <input type="text" id="angka1" placeholder="Masukkan Berat (KG)">
+        <input type="text" id="angka2" placeholder="Masukkan Tinggi (CM)">
+
+        <button onclick="hitung()">Hitung BMI</button>
+
+        <button onclick="reset()" style="background: #e74c3c;">Reset</button>
+
+        <div class="hasil">BMI: <span id="hasilAngka">0</span></div>
+
+    </div>
+
+    <script>
+
+        // Penjelasan: document.getElementById digunakan untuk mengambil nilai dari tag HTML
+
+        function hitung() {
+
+            let a = parseFloat(document.getElementById('angka1').value);
+            let b = parseFloat(document.getElementById('angka2').value);
+            let c = a / ((b / 100) * (b / 100));
+
+            if (c < 18.5) {
+                return document.getElementById('hasilAngka').innerHTML = c + " (Kurus)";
+            } else if (c >= 18.5 && c < 25) {
+                return document.getElementById('hasilAngka').innerHTML = c + " (Normal)";
+            } else if (c >= 25 && c < 30) {
+                return document.getElementById('hasilAngka').innerHTML = c + " (Gemuk)";
+            } else {
+                return document.getElementById('hasilAngka').innerHTML = c + " (Obesitas)";
+            }
+
+        }
+
+
+        function reset() {
+
+            document.getElementById('angka1').value = "";
+
+            document.getElementById('angka2').value = "";
+
+            document.getElementById('hasilAngka').innerHTML = '0';
+
+        }
+
+    </script>
+
+</body>
+
+</html>

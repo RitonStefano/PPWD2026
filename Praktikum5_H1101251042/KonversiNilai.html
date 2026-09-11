@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Konversi Nilai Sederhana</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f0f8ff;
+        }
+
+        .suhu {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        input {
+            padding: 10px;
+            margin: 5px;
+            font-size: 16px;
+            width: 80%;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 10px 15px;
+            margin: 5px;
+            font-size: 16px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #2980b9;
+        }
+
+        .hasil {
+            font-size: 28px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-top: 20px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="suhu">
+
+        <h2>Konversi Nilai</h2>
+
+        <input type="number" id="angka1" placeholder="Masukkan Nilai"><br>
+
+        <button onclick="konversi()">Konversi</button>
+
+        <button onclick="reset()" style="background: #e74c3c;">Reset</button>
+
+        <div class="hasil">Hasil: <span id="hasilAngka">0</span></div>
+
+    </div>
+
+    <script>
+
+        // Penjelasan: document.getElementById digunakan untuk mengambil nilai dari tag HTML
+
+        function konversi() {
+
+            let a = parseFloat(document.getElementById('angka1').value);
+
+            if (a >= 90 && a <= 100) {
+                document.getElementById('hasilAngka').innerHTML = "A";
+            } 
+            else if (a >= 80 && a < 90) {
+                document.getElementById('hasilAngka').innerHTML = "B";
+            } 
+            else if (a >= 70 && a < 80) {
+                document.getElementById('hasilAngka').innerHTML = "C";
+            } 
+            else if (a >= 60 && a < 70) {
+                document.getElementById('hasilAngka').innerHTML = "D";
+            } 
+            else if (a >= 0 && a < 60) {
+                document.getElementById('hasilAngka').innerHTML = "E";
+            } 
+            else {
+                document.getElementById('hasilAngka').innerHTML = "Nilai tidak valid";
+            }
+
+        }
+
+
+        function reset() {
+
+            document.getElementById('angka1').value = "";
+
+            document.getElementById('hasilAngka').innerHTML = '0';
+
+        }
+
+    </script>
+
+</body>
+
+</html>
