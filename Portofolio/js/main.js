@@ -25,8 +25,8 @@ function typeEffect() {
     }
     setTimeout(typeEffect, delay);
 }
-// Start typing effect
-typeEffect();
+// Start typing effect only on the home page.
+if (typingText) typeEffect();
 // ========== GENERATE PROJECT CARDS ==========
 const projects = [
     {
@@ -59,7 +59,7 @@ projects.forEach(project => {
     card.addEventListener('click', function () {
         alert(`Anda memilih proyek: ${project.title}`);
     });
-    projectGrid.appendChild(card);
+    if (projectGrid) projectGrid.appendChild(card);
 });
 // ========== SMOOTH SCROLL NAV ==========
 document.querySelectorAll('.nav-links a').forEach(link => {
@@ -84,52 +84,166 @@ document.querySelectorAll('.nav-links a').forEach(link => {
 });
 
 // =========================================================
-// ABOUT & CONTACT JAVASCRIPT
+// LIVING ABOUT & CONTACT JAVASCRIPT
+// Tambahkan di paling bawah main.js
 // =========================================================
+
+
+// ================================
+// SKILL BAR ANIMATION
+// ================================
+
+const skillProgress =
+    document.querySelectorAll('.skill-progress');
+
+if (skillProgress.length > 0) {
+
+    const skillObserver =
+        new IntersectionObserver(
+            function (entries) {
+
+                entries.forEach(function (entry) {
+
+                    if (entry.isIntersecting) {
+
+                        const width =
+                            entry.target.dataset.width;
+
+                        entry.target.style.width =
+                            width;
+
+                    }
+
+                });
+
+            },
+            {
+                threshold: 0.5
+            }
+        );
+
+
+    skillProgress.forEach(function (skill) {
+
+        skillObserver.observe(skill);
+
+    });
+
+}
+
+
+// ================================
+// SCROLL REVEAL
+// ================================
+
+const revealElements = document.querySelectorAll(
+    '.timeline-item, .stat-card, .skill-card, .contact-big-card'
+);
+
+if (revealElements.length > 0) {
+
+    revealElements.forEach(function (element) {
+
+        element.style.opacity = '0';
+
+        element.style.transform =
+            'translateY(25px)';
+
+        element.style.transition =
+            'opacity 0.7s ease, transform 0.7s ease';
+
+    });
+
+
+    const revealObserver =
+        new IntersectionObserver(
+            function (entries) {
+
+                entries.forEach(function (entry) {
+
+                    if (entry.isIntersecting) {
+
+                        entry.target.style.opacity = '1';
+
+                        entry.target.style.transform =
+                            'translateY(0)';
+
+                        revealObserver.unobserve(
+                            entry.target
+                        );
+
+                    }
+
+                });
+
+            },
+            {
+                threshold: 0.15
+            }
+        );
+
+
+    revealElements.forEach(function (element) {
+
+        revealObserver.observe(element);
+
+    });
+
+}
 
 
 // ================================
 // CONTACT FORM
 // ================================
 
-const contactForm = document.getElementById('contact-form');
+const contactForm =
+    document.getElementById('contact-form');
+
 
 if (contactForm) {
 
-    const nameInput = document.getElementById('name');
-    const emailInput = document.getElementById('email');
-    const subjectInput = document.getElementById('subject');
-    const messageInput = document.getElementById('message');
+    const nameInput =
+        document.getElementById('name');
 
-    const charCount = document.getElementById('char-count');
-    const formStatus = document.getElementById('form-status');
+    const emailInput =
+        document.getElementById('email');
+
+    const subjectInput =
+        document.getElementById('subject');
+
+    const messageInput =
+        document.getElementById('message');
+
+    const charCount =
+        document.getElementById('char-count');
+
+    const formStatus =
+        document.getElementById('form-status');
 
 
-    // ================================
     // CHARACTER COUNTER
-    // ================================
 
     if (messageInput && charCount) {
 
-        messageInput.addEventListener('input', function () {
+        messageInput.addEventListener(
+            'input',
+            function () {
 
-            const currentLength = messageInput.value.length;
+                charCount.textContent =
+                    `${messageInput.value.length}/500`;
 
-            charCount.textContent =
-                `${currentLength}/500`;
-
-        });
+            }
+        );
 
     }
 
 
-    // ================================
     // CLEAR ERROR
-    // ================================
 
     function clearFormErrors() {
 
-        document.querySelectorAll('.error-message')
+        document
+            .querySelectorAll('.error-message')
             .forEach(function (error) {
 
                 error.textContent = '';
@@ -137,124 +251,147 @@ if (contactForm) {
             });
 
         formStatus.className = '';
+
         formStatus.textContent = '';
 
     }
 
 
-    // ================================
-    // FORM SUBMIT
-    // ================================
+    // SUBMIT
 
-    contactForm.addEventListener('submit', function (event) {
+    contactForm.addEventListener(
+        'submit',
+        function (event) {
 
-        event.preventDefault();
+            event.preventDefault();
 
-        clearFormErrors();
+            clearFormErrors();
 
-        let valid = true;
-
-
-        // ================================
-        // NAME
-        // ================================
-
-        if (nameInput.value.trim() === '') {
-
-            document.getElementById('name-error')
-                .textContent = 'Nama wajib diisi.';
-
-            valid = false;
-
-        }
+            let valid = true;
 
 
-        // ================================
-        // EMAIL
-        // ================================
+            // NAME
 
-        const emailPattern =
-            /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (
+                nameInput.value.trim() === ''
+            ) {
 
-        if (emailInput.value.trim() === '') {
+                document.getElementById(
+                    'name-error'
+                ).textContent =
+                    'Nama wajib diisi.';
 
-            document.getElementById('email-error')
-                .textContent = 'Email wajib diisi.';
+                valid = false;
 
-            valid = false;
-
-        } else if (!emailPattern.test(emailInput.value)) {
-
-            document.getElementById('email-error')
-                .textContent = 'Format email tidak valid.';
-
-            valid = false;
-
-        }
-
-
-        // ================================
-        // SUBJECT
-        // ================================
-
-        if (subjectInput.value.trim() === '') {
-
-            document.getElementById('subject-error')
-                .textContent = 'Subjek wajib diisi.';
-
-            valid = false;
-
-        }
-
-
-        // ================================
-        // MESSAGE
-        // ================================
-
-        if (messageInput.value.trim() === '') {
-
-            document.getElementById('message-error')
-                .textContent = 'Pesan wajib diisi.';
-
-            valid = false;
-
-        } else if (messageInput.value.trim().length < 10) {
-
-            document.getElementById('message-error')
-                .textContent =
-                'Pesan minimal 10 karakter.';
-
-            valid = false;
-
-        }
-
-
-        // ================================
-        // RESULT
-        // ================================
-
-        if (valid) {
-
-            formStatus.className = 'success';
-
-            formStatus.textContent =
-                '✓ Pesan berhasil dikirim! Terima kasih sudah menghubungi saya.';
-
-            contactForm.reset();
-
-            if (charCount) {
-                charCount.textContent = '0/500';
             }
 
-        } else {
 
-            formStatus.className = 'error';
+            // EMAIL
 
-            formStatus.textContent =
-                'Silakan periksa kembali data yang Anda masukkan.';
+            const emailPattern =
+                /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+
+            if (
+                emailInput.value.trim() === ''
+            ) {
+
+                document.getElementById(
+                    'email-error'
+                ).textContent =
+                    'Email wajib diisi.';
+
+                valid = false;
+
+            } else if (
+                !emailPattern.test(
+                    emailInput.value
+                )
+            ) {
+
+                document.getElementById(
+                    'email-error'
+                ).textContent =
+                    'Format email tidak valid.';
+
+                valid = false;
+
+            }
+
+
+            // SUBJECT
+
+            if (
+                subjectInput.value.trim() === ''
+            ) {
+
+                document.getElementById(
+                    'subject-error'
+                ).textContent =
+                    'Subjek wajib diisi.';
+
+                valid = false;
+
+            }
+
+
+            // MESSAGE
+
+            if (
+                messageInput.value.trim() === ''
+            ) {
+
+                document.getElementById(
+                    'message-error'
+                ).textContent =
+                    'Pesan wajib diisi.';
+
+                valid = false;
+
+            } else if (
+                messageInput.value.trim().length < 10
+            ) {
+
+                document.getElementById(
+                    'message-error'
+                ).textContent =
+                    'Pesan minimal 10 karakter.';
+
+                valid = false;
+
+            }
+
+
+            // SUCCESS
+
+            if (valid) {
+
+                formStatus.className =
+                    'success';
+
+                formStatus.textContent =
+                    '✓ Formulir valid. Terima kasih sudah menyiapkan pesan untuk saya.';
+
+                contactForm.reset();
+
+                if (charCount) {
+
+                    charCount.textContent =
+                        '0/500';
+
+                }
+
+            } else {
+
+                formStatus.className =
+                    'error';
+
+                formStatus.textContent =
+                    'Silakan periksa kembali data yang Anda masukkan.';
+
+            }
 
         }
-
-    });
+    );
 
 }
