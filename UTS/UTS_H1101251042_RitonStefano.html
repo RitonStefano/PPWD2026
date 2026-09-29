@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>RitonStefano-1042</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            margin: 20px;
+        }
+
+        .Survey {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 400px;
+            margin: auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .pertanyaan {
+            margin-bottom: 20px;
+        }
+
+        .pertanyaan label:first-child {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        input[type="radio"] {
+            margin-left: 8px;
+        }
+
+        .progress-container {
+            background-color: #ddd;
+            border-radius: 10px;
+            height: 20px;
+            margin: 15px 0;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            background-color: #3498db;
+            height: 100%;
+            width: 0%;
+            transition: 0.3s;
+        }
+
+        .tombol {
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 16px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #f9b600;
+        }
+
+        #hasil {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        .footer {
+            background: #464c53;
+            color: white;
+            text-align: center;
+            padding: 2px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <section class="Survey">
+
+        <h1>Survey Kepuasan</h1>
+
+        <p id="progressText">Progress: 0/5</p>
+
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+
+
+        <div class="pertanyaan">
+            <label>Rating Visual:</label>
+
+            <input type="radio" name="survey1" value="1" onchange="updateProgress()">
+            <label>1</label>
+
+            <input type="radio" name="survey1" value="2" onchange="updateProgress()">
+            <label>2</label>
+
+            <input type="radio" name="survey1" value="3" onchange="updateProgress()">
+            <label>3</label>
+
+            <input type="radio" name="survey1" value="4" onchange="updateProgress()">
+            <label>4</label>
+
+            <input type="radio" name="survey1" value="5" onchange="updateProgress()">
+            <label>5</label>
+        </div>
+
+
+        <div class="pertanyaan">
+            <label>Rating Kenyamanan:</label>
+
+            <input type="radio" name="survey2" value="1" onchange="updateProgress()">
+            <label>1</label>
+
+            <input type="radio" name="survey2" value="2" onchange="updateProgress()">
+            <label>2</label>
+
+            <input type="radio" name="survey2" value="3" onchange="updateProgress()">
+            <label>3</label>
+
+            <input type="radio" name="survey2" value="4" onchange="updateProgress()">
+            <label>4</label>
+
+            <input type="radio" name="survey2" value="5" onchange="updateProgress()">
+            <label>5</label>
+        </div>
+
+
+        <div class="pertanyaan">
+            <label>Rating Interaktif:</label>
+
+            <input type="radio" name="survey3" value="1" onchange="updateProgress()">
+            <label>1</label>
+
+            <input type="radio" name="survey3" value="2" onchange="updateProgress()">
+            <label>2</label>
+
+            <input type="radio" name="survey3" value="3" onchange="updateProgress()">
+            <label>3</label>
+
+            <input type="radio" name="survey3" value="4" onchange="updateProgress()">
+            <label>4</label>
+
+            <input type="radio" name="survey3" value="5" onchange="updateProgress()">
+            <label>5</label>
+        </div>
+
+
+        <div class="pertanyaan">
+            <label>Rating Audio:</label>
+
+            <input type="radio" name="survey4" value="1" onchange="updateProgress()">
+            <label>1</label>
+
+            <input type="radio" name="survey4" value="2" onchange="updateProgress()">
+            <label>2</label>
+
+            <input type="radio" name="survey4" value="3" onchange="updateProgress()">
+            <label>3</label>
+
+            <input type="radio" name="survey4" value="4" onchange="updateProgress()">
+            <label>4</label>
+
+            <input type="radio" name="survey4" value="5" onchange="updateProgress()">
+            <label>5</label>
+        </div>
+
+
+        <div class="pertanyaan">
+            <label>Rating CharDev:</label>
+
+            <input type="radio" name="survey5" value="1" onchange="updateProgress()">
+            <label>1</label>
+
+            <input type="radio" name="survey5" value="2" onchange="updateProgress()">
+            <label>2</label>
+
+            <input type="radio" name="survey5" value="3" onchange="updateProgress()">
+            <label>3</label>
+
+            <input type="radio" name="survey5" value="4" onchange="updateProgress()">
+            <label>4</label>
+
+            <input type="radio" name="survey5" value="5" onchange="updateProgress()">
+            <label>5</label>
+        </div>
+
+        <section class="tombol">
+            <button onclick="tambah()" type="button">Submit</button>
+        </section>
+
+
+        <div id="hasil"></div>
+
+    </section>
+
+
+    <div class="footer">
+        <p>&copy;2026 - Survey Pengembangan Kualitas</p>
+    </div>
+
+
+    <script>
+
+        function updateProgress() {
+
+            let jumlahTerjawab = 0;
+
+            for (let i = 1; i <= 5; i++) {
+
+                let jawaban = document.querySelector(
+                    'input[name="survey' + i + '"]:checked'
+                );
+
+                if (jawaban) {
+                    jumlahTerjawab++;
+                }
+            }
+
+            let progress = (jumlahTerjawab / 5) * 100;
+
+            document.getElementById("progressBar").style.width = progress + "%";
+
+            document.getElementById("progressText").innerHTML =
+                "Progress: " + jumlahTerjawab + "/5";
+        }
+
+
+        function tambah() {
+
+            let total = 0;
+
+            for (let i = 1; i <= 5; i++) {
+
+                let jawaban = document.querySelector(
+                    'input[name="survey' + i + '"]:checked'
+                );
+
+                if (!jawaban) {
+
+                    document.getElementById("hasil").innerHTML =
+                        "Semua pertanyaan harus dijawab!";
+
+                    return;
+                }
+
+                total += parseInt(jawaban.value);
+            }
+
+            let rataRata = total / 5;
+
+            let kesimpulan;
+
+
+            if (rataRata >= 4) {
+
+                kesimpulan = "Sangat Puas";
+
+            } else if (rataRata >= 3) {
+
+                kesimpulan = "Puas";
+
+            } else if (rataRata >= 2) {
+
+                kesimpulan = "Cukup Puas";
+
+            } else {
+
+                kesimpulan = "Tidak Puas";
+            }
+
+
+            document.getElementById("hasil").innerHTML =
+                "Rata-rata: " + rataRata.toFixed(2) +
+                "<br>Kesimpulan: " + kesimpulan;
+        }
+
+    </script>
+
+</body>
+
+</html>
